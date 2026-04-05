@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FinOps for AI — Cost Explosion Simulator</title>
+  <title>AI Cost Explosion Simulator</title>
   <style>
     :root {
       --taupe-900: #3b322b;
@@ -240,18 +240,17 @@
 <body>
   <div class="page">
     <header class="card">
-      <h1>Start Summary: A small pilot project can become runaway AI cost in days</h1>
+      <h1>🚗 Uncontrolled AI costs are like a car with no brakes — fun until the wall</h1>
       <p>
-        This simulation begins with a modest model pilot and then scales AI demand through training cycles, inference traffic, and data growth.
-        Watch how quickly cost behavior changes, then activate FinOps practices to stabilize spend before budget overruns compromise project viability.
+        Drag the sliders to watch a small pilot balloon into a budget crisis. Then flip the FinOps switches to see what happens when you finally put the brakes on.
       </p>
     </header>
 
     <main class="main">
       <section class="panel card" aria-label="Cost growth controls">
-        <h2>Workload pressure shaping cost growth</h2>
+        <h2>⚡ Crank up the workload</h2>
         <p class="narrative">
-          Shift workload intensity to represent real-world experimentation. The forecasted baseline shows how fast unmanaged AI operations drift from planned budget targets.
+          Like turning up the heat on a cloud bill — the more you train, call, and expand data, the faster cost compounds. No one's going to warn you.
         </p>
 
         <div class="controls">
@@ -276,21 +275,21 @@
         </div>
 
         <div class="status">
-          <span id="riskText">Risk signal: current spending trajectory is containable.</span>
-          <span class="badge alert" id="riskBadge">Rising Exposure</span>
+          <span id="riskText">No guardrails — this is how teams wake up to a 10× bill.</span>
+          <span class="badge alert" id="riskBadge">No Brakes 🚨</span>
         </div>
       </section>
 
       <section class="panel card" aria-label="FinOps intervention and cost impact">
-        <h2>FinOps AI interventions</h2>
+        <h2>🛡️ FinOps guardrails</h2>
         <p class="narrative">
-          Turn on governance levers to represent day-0 FinOps design. The managed curve overlays savings impact and reveals how accountability and guardrails preserve AI momentum.
+          Think of each toggle as a spending limit on a surprise subscription. Flip one and the chart reacts immediately — this is what "shifting left on cost" looks like in practice.
         </p>
 
         <div class="switches">
-          <label class="switch"><input id="tagging" type="checkbox" />Workload tagging and ownership transparency</label>
-          <label class="switch"><input id="guardrails" type="checkbox" />Budget guardrails and approval thresholds</label>
-          <label class="switch"><input id="shared" type="checkbox" />Shared budgets across product and platform teams</label>
+          <label class="switch"><input id="tagging" type="checkbox" />Tag workloads — know who owns what spend</label>
+          <label class="switch"><input id="guardrails" type="checkbox" />Budget guardrails — auto-stop before overspend</label>
+          <label class="switch"><input id="shared" type="checkbox" />Shared budgets — teams see each other's impact</label>
         </div>
 
         <div class="metrics" aria-live="polite">
@@ -307,7 +306,7 @@
 
     <footer class="card">
       <p id="endSummary">
-        End Summary: FinOps for AI is most effective when introduced early—visibility, control, and shared accountability convert volatile AI growth into a predictable investment path and stronger AI development velocity.
+        ⚠️ No guardrails yet. Toggle the switches above to see how quickly costs become manageable.
       </p>
     </footer>
   </div>
@@ -386,23 +385,23 @@
 
       const coverage = Math.round(controls * 100);
       if (coverage >= 35) {
-        riskBadge.textContent = "Controlled Trajectory";
+        riskBadge.textContent = "Controlled ✅";
         riskBadge.className = "badge good";
-        riskText.textContent = "Risk signal: spend is aligned with value checkpoints and ownership.";
+        riskText.textContent = "Brakes are on. Spend is predictable and owned.";
       } else if (coverage >= 15) {
-        riskBadge.textContent = "Partial Control";
+        riskBadge.textContent = "Partial Control ⚠️";
         riskBadge.className = "badge alert";
-        riskText.textContent = "Risk signal: guardrails help, but cost volatility can still surprise teams.";
+        riskText.textContent = "One guardrail helps — but a surprise bill is still possible.";
       } else {
-        riskBadge.textContent = "Rising Exposure";
+        riskBadge.textContent = "No Brakes 🚨";
         riskBadge.className = "badge alert";
-        riskText.textContent = "Risk signal: unmanaged AI demand is likely to outpace budget controls.";
+        riskText.textContent = "No guardrails — this is how teams wake up to a 10× bill.";
       }
 
       endSummary.textContent =
         coverage >= 35
-          ? "End Summary: Early FinOps controls are actively flattening growth, proving AI scale can sustain AI development velocity while remaining financially accountable."
-          : "End Summary: The trajectory shows why FinOps for AI must be embedded early; without stronger guardrails, growth pressure will continue to widen spend variance.";
+          ? "✅ FinOps controls are working: the managed curve is flattening. Early guardrails = no nasty surprises."
+          : "⚠️ No guardrails yet. Toggle the switches above to see how quickly costs become manageable.";
 
       drawCurve(baseline, managed, coverage >= 35);
     }
