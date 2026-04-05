@@ -29,6 +29,7 @@ The curriculum is organized into seven sections. Each section folder contains su
 - Use the objectives and discussion prompts in every `lesson.md` to facilitate workshops or self-study
 - Capture implementation decisions, KPIs, and action items alongside the provided prompts to tailor the material to your organization
 - Leverage the demo scenarios in `demos/README.md` to reinforce each section with live or recorded walkthroughs
+- Reference `interactive-ideas.md` in each section for advanced single-page HTML experiences that transform complex concepts into hands-on simulations
 
 ## Resources
 - Official course overview: https://learn.finops.org/path/certified-finops-for-ai
