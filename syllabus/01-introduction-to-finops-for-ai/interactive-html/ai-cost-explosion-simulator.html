@@ -240,7 +240,7 @@
 <body>
   <div class="page">
     <header class="card">
-      <h1>Start Summary: A calm pilot can become a runaway AI bill in days</h1>
+      <h1>Start Summary: A small pilot project can become a runaway AI bill in days</h1>
       <p>
         This simulation begins with a modest model pilot and then scales AI demand through training cycles, inference traffic, and data growth.
         Watch how quickly cost behavior changes, then activate FinOps practices to stabilize spend before value delivery is compromised.
@@ -335,6 +335,22 @@
     const canvas = el("curve");
     const ctx = canvas.getContext("2d");
 
+    const COST_MODEL = {
+      BASE_COST: 14000,
+      EPOCH_COST_MULTIPLIER: 1800,
+      INFERENCE_COST_MULTIPLIER: 2600,
+      DATA_SCALE_COST_MULTIPLIER: 4200,
+      EPOCH_GROWTH_WEIGHT: 0.35,
+      INFERENCE_GROWTH_WEIGHT: 0.3,
+      DATA_GROWTH_WEIGHT: 0.25
+    };
+
+    const FINOPS_SAVINGS = {
+      TAGGING_RATE: 0.13,
+      GUARDRAILS_RATE: 0.18,
+      SHARED_BUDGET_RATE: 0.11
+    };
+
     function formatUSD(value) {
       return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
     }
@@ -348,11 +364,19 @@
       inferenceOut.textContent = String(i);
       dataOut.textContent = d.toFixed(1) + "x";
 
-      const base = 14000 + (e * 1800) + (i * 2600) + (Math.pow(d, 2) * 4200);
-      const growthFactor = 1 + ((e / 40) * 0.35) + ((i / 20) * 0.3) + ((d / 5) * 0.25);
+      const base = COST_MODEL.BASE_COST
+        + (e * COST_MODEL.EPOCH_COST_MULTIPLIER)
+        + (i * COST_MODEL.INFERENCE_COST_MULTIPLIER)
+        + (Math.pow(d, 2) * COST_MODEL.DATA_SCALE_COST_MULTIPLIER);
+      const growthFactor = 1
+        + ((e / 40) * COST_MODEL.EPOCH_GROWTH_WEIGHT)
+        + ((i / 20) * COST_MODEL.INFERENCE_GROWTH_WEIGHT)
+        + ((d / 5) * COST_MODEL.DATA_GROWTH_WEIGHT);
       const baseline = base * growthFactor;
 
-      const controls = (tagging.checked ? 0.13 : 0) + (guardrails.checked ? 0.18 : 0) + (shared.checked ? 0.11 : 0);
+      const controls = (tagging.checked ? FINOPS_SAVINGS.TAGGING_RATE : 0)
+        + (guardrails.checked ? FINOPS_SAVINGS.GUARDRAILS_RATE : 0)
+        + (shared.checked ? FINOPS_SAVINGS.SHARED_BUDGET_RATE : 0);
       const managed = baseline * (1 - controls);
       const savings = baseline - managed;
 
